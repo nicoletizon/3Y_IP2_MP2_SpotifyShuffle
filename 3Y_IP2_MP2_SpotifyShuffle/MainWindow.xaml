@@ -1,9 +1,9 @@
 ﻿<Window x:Class="SongDatabaseApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Spotify Shuffle" Width="648" Height="600">
+        Title="" Width="766" Height="600">
 
-    <Grid Background="#1ed760">
+    <Grid>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -11,20 +11,34 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+
+
         <StackPanel
             Grid.Row="1"
             Orientation="Horizontal"
             Margin="20">
-                
+
+            <TextBlock Name="title"
+            Text="SPOTIFY SHUFFLE"
+            Foreground="#1DB954"
+            FontWeight="Bold"
+            FontSize="24"
+            VerticalAlignment="Center" 
+            HorizontalAlignment="Left" 
+             Margin="0,0,50,0"
+             Width="200"/>
+
             <TextBox 
+                BorderBrush="Black"
+                BorderThickness="2.0"
+                FontSize="15"
                 Name="searchTextBox" 
                 VerticalAlignment="Center" 
-                HorizontalAlignment="Left" 
-                Margin="0,0,50,0"
-                Width="200"
-                KeyUp="searchTextBox_KeyUp"/>
-            
-            
+                Margin="0,0,20,0"
+                Width="205"
+                KeyUp="searchTextBox_KeyUp" Height="26"/>
+
+
 
             <StackPanel
                 Orientation="Horizontal">
@@ -33,28 +47,32 @@
                     HorizontalAlignment="Left" 
                     VerticalAlignment="Top"
                     Click="ShuffleButton_Click"
+                    BorderBrush="Black"
                     Padding="5"
-                    Margin="0,0,5,0"/>
+                    Margin="0,2,5,0"/>
                 <Button 
-                    Content="Save" 
+                    Content="Save File" 
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top" 
                     Click="SaveButton_Click"
+                    BorderBrush="Black"
                     Padding="5"
-                    Margin="0,0,5,0"/>
+                    Margin="0,2,5,0"/>
                 <Button 
                     Content="Back" 
                     HorizontalAlignment="Left" 
                     VerticalAlignment="Top" 
                     Click="backButton_Click"
+                    BorderBrush="Black"
                     Padding="5"
-                    Margin="0,0,5,0"/>
+                    Margin="0,2,5,0"/>
                 <Button 
-                    Content="Load File" 
+                    Content="Open File" 
                     HorizontalAlignment="Left" 
                     VerticalAlignment="Top" 
                     Click="LoadButton_Click"
-                    Margin="0,0,5,0"
+                    BorderBrush="Black"
+                    Margin="0,2,5,0"
                     Padding="5"/>
             </StackPanel>
         </StackPanel>
@@ -62,14 +80,17 @@
         <ListBox Background="#ffffff"
             Grid.Row="2"
             Name="songListBox" 
+            BorderBrush="Green"
+                 BorderThickness="2"
             SelectionChanged="songListBox_SelectionChanged">
 
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="{Binding SongNumber}"
-                                   FontWeight="Bold"/>
-                        <TextBlock Text="{Binding Artist}"/>
+                        <TextBlock Text="{Binding SongNumber}"/>
+                        <TextBlock Text="{Binding Artist}"
+                                   FontWeight="Bold"
+                                   FontSize="20"/>
                         <TextBlock Text="{Binding Title}"/>
                         <TextBlock Text="{Binding Year}"/>
                     </StackPanel>
