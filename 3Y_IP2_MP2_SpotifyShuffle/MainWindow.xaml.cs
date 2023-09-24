@@ -35,18 +35,20 @@ namespace SongDatabaseApp
             try
             {
                 var lines = File.ReadAllLines(filePath);
-                var data = lines.Skip(1).Select(line => line.Split(',')).ToList();
 
                 allSongs.Clear();
-                foreach (var lineData in data)
+                for (int i = 1; i < lines.Length; i++) // Start from index 1 to skip the header
                 {
-                    if (lineData.Length >= 3)
+                    var lineData = lines[i].Split(',');
+
+                    if (lineData.Length >= 4)
                     {
                         allSongs.Add(new Song
                         {
-                            Title = lineData[0],
+                            SongNumber = int.Parse(lineData[0]),
                             Artist = lineData[1],
-                            Year = lineData[2]
+                            Title = lineData[2],
+                            Year = lineData[3]
                         });
                     }
                 }
@@ -56,6 +58,8 @@ namespace SongDatabaseApp
                 MessageBox.Show($"Error loading data: {ex.Message}");
             }
         }
+
+
 
         private void ShuffleSongs()
         {
@@ -68,8 +72,13 @@ namespace SongDatabaseApp
         {
             try
             {
-                var lines = new List<string> { "Title,Artist,Year" };
-                lines.AddRange(displayedSongs.Select(song => $"{song.Title},{song.Artist},{song.Year}"));
+                var lines = new List<string> { "Song Number,Title,Artist,Year" };
+
+                foreach (var song in displayedSongs)
+                {
+                    lines.Add($"{song.SongNumber},{song.Title},{song.Artist},{song.Year}");
+                }
+
                 File.WriteAllLines(filePath, lines);
                 MessageBox.Show("Songs saved to CSV successfully.");
             }
@@ -78,6 +87,7 @@ namespace SongDatabaseApp
                 MessageBox.Show($"Error saving data: {ex.Message}");
             }
         }
+
 
         private void songListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
@@ -99,8 +109,8 @@ namespace SongDatabaseApp
         {
             string searchText = searchTextBox.Text.ToLower();
             displayedSongs = new ObservableCollection<Song>(allSongs
-                .Where(song => song.Title.ToLower().Contains(searchText) ||
-                               song.Artist.ToLower().Contains(searchText) ||
+                .Where(song => song.Artist.ToLower().Contains(searchText) ||
+                               song.Title.ToLower().Contains(searchText) ||
                                song.Year.ToLower().Contains(searchText)));
             songListBox.ItemsSource = displayedSongs;
         }

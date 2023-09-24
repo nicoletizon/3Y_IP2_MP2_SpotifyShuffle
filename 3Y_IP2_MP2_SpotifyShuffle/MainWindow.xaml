@@ -1,23 +1,15 @@
 ﻿<Window x:Class="SongDatabaseApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Song Database" Width="800" Height="600">
-    
-    <Grid>
+        Title="Spotify Shuffle" Width="648" Height="600">
+
+    <Grid Background="#1ed760">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <TextBlock
-            Text="Spotify DJ"
-            FontWeight="Bold"
-            Margin="0,10,0,0"
-            HorizontalAlignment="Center"
-            FontSize="18"
-            Foreground="#1ED760"/>
 
         <StackPanel
             Grid.Row="1"
@@ -31,6 +23,8 @@
                 Margin="0,0,50,0"
                 Width="200"
                 KeyUp="searchTextBox_KeyUp"/>
+            
+            
 
             <StackPanel
                 Orientation="Horizontal">
@@ -64,8 +58,8 @@
                     Padding="5"/>
             </StackPanel>
         </StackPanel>
-        
-        <ListBox 
+
+        <ListBox Background="#ffffff"
             Grid.Row="2"
             Name="songListBox" 
             SelectionChanged="songListBox_SelectionChanged">
@@ -73,9 +67,10 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="{Binding Title}" 
+                        <TextBlock Text="{Binding SongNumber}"
                                    FontWeight="Bold"/>
                         <TextBlock Text="{Binding Artist}"/>
+                        <TextBlock Text="{Binding Title}"/>
                         <TextBlock Text="{Binding Year}"/>
                     </StackPanel>
                 </DataTemplate>
